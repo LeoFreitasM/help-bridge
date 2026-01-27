@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: HelpBridge
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/helpBridge?useTimezone=true&serverTimezone=UTC
+    username: root
+    password: 123456789
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        show-sql: true
+        open-in-view: true
