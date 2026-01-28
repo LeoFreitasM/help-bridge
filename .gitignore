@@ -1,3 +1,4 @@
+
 # Logs
 logs
 *.log
@@ -22,3 +23,27 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Maven
+target/
+
+# IDE
+.idea/
+.vscode/
+*.iml
+*.classpath
+*.project
+*.settings/
+
+# Logs
+*.log
+
+# Config local
+.env
+application-local.properties
+application-local.yml
+
+# Sistema
+.DS_Store
+Thumbs.db
+
