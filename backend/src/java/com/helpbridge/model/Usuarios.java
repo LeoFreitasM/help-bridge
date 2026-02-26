@@ -4,12 +4,22 @@ import com.helpbridge.enums.Profile;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+import java.util.List;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "users")
-public class Usuarios {
+public class Usuarios implements UserDetails {
+
+    public Usuarios(){
+
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,47 +38,50 @@ public class Usuarios {
     @Column(nullable = false)
     private Profile profile;
 
-  /*  public Usuarios() {
-    }
-
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
+    public Usuarios(String name, String email, String password, Profile profile) {
         this.name = name;
+        this.email = email;
+        this.password = password;
+        this.profile = profile;
     }
 
-    public String getEmail() {
+    public Usuarios(String email, String password, Profile profile){
+        this.email = email;
+        this.password = password;
+        this.profile = profile;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        if (this.profile == Profile.ADMIN) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        else return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+    }
+
+    @Override
+    public String getUsername() {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
     }
 
-    public String getPassword() {
-        return password;
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
     }
 
-    public Profile getProfile() {
-        return profile;
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
-
-    public void setProfile(Profile profile) {
-        this.profile = profile;
-    }*/
 }
+
+

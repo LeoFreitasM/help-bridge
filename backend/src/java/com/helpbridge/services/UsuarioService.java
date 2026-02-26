@@ -7,6 +7,8 @@ import com.helpbridge.mapstruct.UsuarioMapper;
 import com.helpbridge.model.Usuarios;
 import com.helpbridge.repositories.UsuariosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,11 +18,20 @@ import java.util.Optional;
 @Service
 public class UsuarioService {
 
-    @Autowired
-    UsuariosRepository usuariosRepository;
 
-    @Autowired
-    UsuarioMapper mapper;
+    private final UsuariosRepository usuariosRepository;
+    private final UsuarioMapper mapper;
+    private final PasswordEncoder passwordEncoder;
+
+    public UsuarioService(UsuariosRepository usuariosRepository,
+                          UsuarioMapper usuarioMapper,
+                          PasswordEncoder passwordEncoder){
+
+        this.usuariosRepository = usuariosRepository;
+        this.mapper = usuarioMapper;
+        this.passwordEncoder = passwordEncoder;
+
+    }
 
   /*  public Usuarios create (Usuarios usuarios){
 
@@ -29,14 +40,20 @@ public class UsuarioService {
 
     public UsuarioResponseDTO createUsuario(UsuarioRequestDTO request) {
 
-        return mapper.forResponseDTO(
-                (usuariosRepository.save(
-                        mapper.forUsuarioEntity(request))));
-    }
+        if(usuariosRepository.findByEmail(request.getEmail()).isPresent()) {
+            throw new RuntimeException("Usuário ja existente");
 
-   /* public List<Usuarios> findAll(){
-        return usuariosRepository.findAll();
-    }*/
+        }
+
+        Usuarios usuarios = mapper.forUsuarioEntity(request);
+
+        String hashedPassword = passwordEncoder.encode(usuarios.getPassword());
+        usuarios.setPassword(hashedPassword);
+
+        Usuarios savedUsuario = usuariosRepository.save(usuarios);
+
+        return mapper.forResponseDTO(savedUsuario);
+    }
 
     public List<UsuarioResponseDTO> findAll() {
 

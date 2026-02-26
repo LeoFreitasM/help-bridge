@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:5173") // URL do React
 @RestController
 @RequestMapping("/calls")
 public class CallsController {
@@ -33,6 +34,7 @@ public class CallsController {
     public ResponseEntity<CallsResponseDTO> findById(@PathVariable("id") Long id) {
         return ResponseEntity.ok(callsService.findById(id));
     }
+
 
     @GetMapping
     public ResponseEntity<List<CallsResponseDTO>> findAll() {

@@ -3,36 +3,34 @@ package com.helpbridge.controllers;
 import com.helpbridge.dto.UsuarioResponseDTO;
 import com.helpbridge.dto.UsuarioRequestDTO;
 import com.helpbridge.dto.UsuarioUpdateDTO;
-import com.helpbridge.model.Usuarios;
+import com.helpbridge.repositories.UsuariosRepository;
 import com.helpbridge.services.UsuarioService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-import java.util.Optional;
+
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/usuarios")
 public class UsuariosController {
 
-    @Autowired
-    UsuarioService usuarioService;
 
-    /*@PostMapping
-    public Usuarios create(@RequestBody Usuarios usuarios){
-        return usuarioService.create(usuarios);
-    }*/
-    @PostMapping
-    public ResponseEntity<UsuarioResponseDTO> create(@RequestBody UsuarioRequestDTO dto) {
+    private final UsuarioService usuarioService;
+    private final UsuariosRepository usuariosRepository;
+
+    public UsuariosController(UsuarioService usuarioService, UsuariosRepository usuariosRepository){
+        this.usuarioService = usuarioService;
+        this.usuariosRepository = usuariosRepository;
+    }
+
+
+   @PostMapping
+    public ResponseEntity<UsuarioResponseDTO> create(@RequestBody @Valid UsuarioRequestDTO dto) {
         return ResponseEntity.ok(usuarioService.createUsuario(dto));
     }
 
-   /* @GetMapping(value = "/{id}")
-    public Optional<Usuarios> findById(@PathVariable("id") Long id){
-        return usuarioService.findById(id);
-    }*/
+
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<UsuarioResponseDTO> findById(@PathVariable("id") Long id) {
