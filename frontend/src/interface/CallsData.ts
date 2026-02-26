@@ -1,10 +1,12 @@
-export interface CallsData {
+export interface CreateCallData {
+  title: string;
+  description: string;
+  department: string;
+  priority: "LOW" | "MEDIUM" | "HIGH"; 
+}
 
-    id: number;
-    title: string;
-    description: string;
-    departament: string;
-    status: string;
-    priority: string;
-    usuario: string;
+export interface CallsData extends CreateCallData {
+  id: number;
+  status: string;
+  usuario: string;
 }

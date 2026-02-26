@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+
+.container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    width: 100vw;
+    background-color: rgb(231, 230, 230);
+}
+
+.container h1 {
+    font-family: 'Inter', sans-serif;
+    color: #444;
+    font-weight: 700; 
+    margin-bottom: 1.5rem;  
+   
+}
+
+.kanban{
+    display: flex;
+    gap: 16px;
+    margin-top: 32px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    margin-bottom: 35%;
+}
+
+.kanban h2{
+    font-family: 'Pacifico', cursive;
+    text-align: center;
+  
+}
+
+.new-calls{
+    background-color: #ccfacd;
+    width: 100%;
+}
+
+.progress-calls{
+    background-color: #f7f0b8;
+    width: 100%;
+    
+}
+
+.waiting-calls{
+    background-color: #f7dfba;
+    width: 100%;
+    
+}
+
+.resolved-calls{
+    background-color: #d3e7f8;
+    width: 100%;
+    
+}
+
+/*.card-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+}*/
+
+.container button {
+    background-color: #0275d8;
+    color: white;
+    font-weight: bold;
+    position: fixed;
+    bottom: 16px;
+    border: none;
+    right: 24px;
+    transition: all 0.1s linear 0.1s;
+}   
+
+.container button:hover {
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 7px 0px;
+    transform: scale(1.1);
+}
+

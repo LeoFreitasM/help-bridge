@@ -1,20 +1,25 @@
 import './card.css'
 
-interface CardProps{
+interface CardProps {
 
     title: string;
     description: string;
-    departament: string;
+    department: string;
     status: string;
     priority: string;
     usuario: string;
 }
-export function Card({ title, description, departament, status, priority, usuario } : CardProps){
-    return(
+export function Card({ title, 
+    description,
+    department,
+    status,
+    priority,
+    usuario }: CardProps) {
+    return (
         <div className="card">
-            <h2>{title}</h2>
+            <p><b>Title:</b> {title}</p>
             <p><b>Description:</b> {description}</p>
-            <p><b>Departament:</b> {departament}</p>
+            <p><b>Department:</b> {department}</p>
             <p><b>Status:</b> {status}</p>
             <p><b>Priority:</b> {priority}</p>
             <p><b>Usuario:</b> {usuario}</p>
