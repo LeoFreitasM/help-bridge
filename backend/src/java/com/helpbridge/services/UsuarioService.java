@@ -41,7 +41,7 @@ public class UsuarioService {
     public UsuarioResponseDTO createUsuario(UsuarioRequestDTO request) {
 
         if(usuariosRepository.findByEmail(request.getEmail()).isPresent()) {
-            throw new RuntimeException("Usuário ja existente");
+            throw new RuntimeException("Usuário já existente");
 
         }
 

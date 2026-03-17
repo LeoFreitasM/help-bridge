@@ -53,7 +53,7 @@ public class Usuarios implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if (this.profile == Profile.ADMIN) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        if (this.profile == Profile.ROLE_ADMIN) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"));
         else return List.of(new SimpleGrantedAuthority("ROLE_USER"));
     }
 
