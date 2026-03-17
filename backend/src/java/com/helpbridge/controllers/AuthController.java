@@ -1,6 +1,9 @@
 package com.helpbridge.controllers;
 
 import com.helpbridge.dto.AuthenticationDTO;
+import com.helpbridge.dto.LoginResponseDTO;
+import com.helpbridge.model.Usuarios;
+import com.helpbridge.services.TokenService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,9 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
 
     private final AuthenticationManager authenticationManager;
+    private final TokenService tokenService;
 
-    public AuthController(AuthenticationManager authenticationManager){
+    public AuthController(AuthenticationManager authenticationManager, TokenService tokenService){
         this.authenticationManager = authenticationManager;
+        this.tokenService = tokenService;
     }
 
 
@@ -27,7 +32,9 @@ public class AuthController {
     var usernamePassword = new UsernamePasswordAuthenticationToken(data.email(), data.password()); //classe instanciada do Spring Security
     var auth = authenticationManager.authenticate(usernamePassword);
 
-    return ResponseEntity.ok().build();
+    var token = tokenService.generateToken((Usuarios) auth.getPrincipal());
+
+    return ResponseEntity.ok(new LoginResponseDTO(token));
 
 }
 }

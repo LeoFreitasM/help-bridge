@@ -1,7 +1,7 @@
 package com.helpbridge.enums;
 
 public enum Profile {
-    USER,
-    ADMIN
+    ROLE_USER,
+    ROLE_ADMIN
 
 }

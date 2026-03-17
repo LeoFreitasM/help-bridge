@@ -3,6 +3,7 @@ package com.helpbridge.controllers;
 import com.helpbridge.dto.CallsRequestDTO;
 import com.helpbridge.dto.CallsResponseDTO;
 import com.helpbridge.dto.CallsUpdateDTO;
+import com.helpbridge.repositories.UsuariosRepository;
 import com.helpbridge.services.CallsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:5173") // URL do React
+
 @RestController
 @RequestMapping("/calls")
 public class CallsController {
@@ -43,6 +44,9 @@ public class CallsController {
 
     @PutMapping("/update/{id}")
     public ResponseEntity<CallsResponseDTO> update(@PathVariable("id") Long id, @RequestBody CallsUpdateDTO dto) {
+
+        System.out.println(dto.getStatus());
+
         return ResponseEntity.ok(callsService.update(id, dto));
     }
 

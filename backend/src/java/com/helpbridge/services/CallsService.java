@@ -31,7 +31,7 @@ public class CallsService {
 
         Calls calls = mapper.forCallsEntity(request);
 
-        Usuarios usuario = usuariosRepository.findById(2L)
+        Usuarios usuario = usuariosRepository.findById(1L)
                 .orElseThrow(() -> new RuntimeException("Usuário padrão não encontrado"));
         calls.setUsuario(usuario);
 
@@ -62,18 +62,20 @@ public class CallsService {
 
     public CallsResponseDTO update(Long id, CallsUpdateDTO dto) {
 
-        Calls calls = callsRepository.findById(3L)
+        Calls calls = callsRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Chamado não encontrado"));
+
 
         if (dto.getDescription() != null) calls.setDescription(dto.getDescription());
         if (dto.getPriority() != null) calls.setPriority(dto.getPriority());
         if (dto.getStatus() != null) calls.setStatus(dto.getStatus());
         if (dto.getAdminResponse() != null) calls.setAdminResponse(dto.getAdminResponse());
 
+
+
         Calls updated = callsRepository.save(calls);
 
         return mapper.forCallsResponseDTO(updated);
-
 
     }
 
