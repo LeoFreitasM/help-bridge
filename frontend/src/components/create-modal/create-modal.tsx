@@ -5,7 +5,7 @@ import type { CreateCallData } from "../../interface/CallsData";
 import './modal.css';
 
 interface InputProps<T> {
-    label: string;
+    label?: string;
     value: T;
     updateValue: (value: T) => void;
     type?: "text" | "select" | "textarea";
@@ -16,10 +16,10 @@ interface ModalProps {
     closeModal: () => void;
 }
 
-const Input = <T,>({ label, value, updateValue, type = "text", options = [] }: InputProps<T>) => {
+const Input = <T,>({label, value, updateValue, type = "text", options = [] }: InputProps<T>) => {
     return (
         <>
-            <label>{label}</label>
+            {label && <label>{label}</label>}
 
             {type === "text" && (
                 <input
@@ -89,14 +89,32 @@ export function CreateModal({closeModal}: ModalProps ) {
             <div className="modal-body">
                 <h2>Cadastre um novo chamado</h2>
                 <form className="input-container">
-                    <Input label="Title" value={ title } updateValue={setTitle} type="text" />
-                    <Input label="Description" value={ description } updateValue={setDescription} type="textarea" />
-                    <Input label="Department" value={ department } updateValue={setDepartment} type="text" />
-                    <Input label="Priority" value={ priority } updateValue={setPriority} type="select" options={["LOW", "MEDIUM", "HIGH"]} />
+                    <label>Título</label>
+                    <Input value={ title } updateValue={setTitle} type="text" />
+
+                    <label>Descrição</label>
+                    <Input value={ description } updateValue={setDescription} type="textarea" />
+
+                    <div className="dep-pri">
+                    <div className="department">
+                        <label>Departamento</label>
+                        <Input value={ department } updateValue={setDepartment} type="text" />
+                    </div>
+                    
+                    
+                    <div className='priority'>
+                    <label>Prioridade</label>
+                    <Input value={ priority } updateValue={setPriority} type="select" options={["LOW", "MEDIUM", "HIGH"]} />
+                    </div>
+                    </div>
+                    
 
                 </form>
 
-                <button onClick={submit} className="btn-secondary">Cadastrar</button>
+                <div className="btns">
+                    <button onClick={submit} className="btn-secondary">Cadastrar</button>
+                    <button onClick={closeModal} className="btn-cancelar">Cancelar</button>
+                </div>
             </div>
 
         </div>
