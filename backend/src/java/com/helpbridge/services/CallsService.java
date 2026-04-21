@@ -9,7 +9,9 @@ import com.helpbridge.model.Calls;
 import com.helpbridge.model.Usuarios;
 import com.helpbridge.repositories.CallsRepository;
 import com.helpbridge.repositories.UsuariosRepository;
+import com.helpbridge.security.SecurityFilter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,7 +33,14 @@ public class CallsService {
 
         Calls calls = mapper.forCallsEntity(request);
 
-        Usuarios usuario = usuariosRepository.findById(1L)
+        Usuarios users = (Usuarios) SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getPrincipal();
+
+        Long userId = users.getId();
+
+        Usuarios usuario = usuariosRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("Usuário padrão não encontrado"));
         calls.setUsuario(usuario);
 

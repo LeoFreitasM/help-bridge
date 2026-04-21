@@ -33,11 +33,6 @@ public class UsuarioService {
 
     }
 
-  /*  public Usuarios create (Usuarios usuarios){
-
-        return usuariosRepository.save(usuarios);
-    }*/
-
     public UsuarioResponseDTO createUsuario(UsuarioRequestDTO request) {
 
         if(usuariosRepository.findByEmail(request.getEmail()).isPresent()) {
@@ -61,6 +56,7 @@ public class UsuarioService {
                 usuariosRepository.findAll());
 
     }
+
 
    /* public Optional<Usuarios> findById (Long id){
 

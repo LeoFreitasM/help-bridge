@@ -3,6 +3,7 @@ package com.helpbridge.controllers;
 import com.helpbridge.dto.UsuarioResponseDTO;
 import com.helpbridge.dto.UsuarioRequestDTO;
 import com.helpbridge.dto.UsuarioUpdateDTO;
+import com.helpbridge.model.Usuarios;
 import com.helpbridge.repositories.UsuariosRepository;
 import com.helpbridge.services.UsuarioService;
 import jakarta.validation.Valid;
@@ -25,7 +26,7 @@ public class UsuariosController {
     }
 
 
-   @PostMapping
+   @PostMapping("/newUsuario")
     public ResponseEntity<UsuarioResponseDTO> create(@RequestBody @Valid UsuarioRequestDTO dto) {
         return ResponseEntity.ok(usuarioService.createUsuario(dto));
     }
@@ -37,10 +38,6 @@ public class UsuariosController {
         return ResponseEntity.ok(usuarioService.findById(id));
     }
 
-   /* @GetMapping
-    public List<Usuarios> findAll(){
-        return usuarioService.findAll();
-    }*/
 
     @GetMapping
     public ResponseEntity<List<UsuarioResponseDTO>> findAll() {
