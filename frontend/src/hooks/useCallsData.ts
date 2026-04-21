@@ -1,26 +1,11 @@
-import axios, { } from "axios";
-import type { CallsData } from "../interface/CallsData";
 import { useQuery } from "@tanstack/react-query";
-
-const API_URL = "http://localhost:8080";
-
-const fetchData = async (): Promise<CallsData[]> => {
-    const token = localStorage.getItem("token");
-    if (!token) throw new Error("Usuario não autenticado");
-
-    const response = await axios.get(API_URL + "/calls", {
-        headers: {
-            Authorization: `Bearer ${token}` // template string correta
-        }
-    });
-
-    return response.data;
-}
+import { callsService } from "../services/callsService";
+import type { CallsData } from "../interface/CallsData";
 
 export function useCallsData() {
-    const query = useQuery({
-        queryFn: fetchData,
+    const query = useQuery<CallsData[]>({
         queryKey: ["calls-data"],
+        queryFn: callsService.getCalls,
         retry: 2
     })
 

@@ -59,7 +59,6 @@ const Input = <T,>({label, value, updateValue, type = "text", options = [] }: In
 };
 
 
-// modal que aparece ao clicar em novo 
 export function CreateModal({closeModal}: ModalProps ) {
 
     const [title, setTitle] = useState("");
