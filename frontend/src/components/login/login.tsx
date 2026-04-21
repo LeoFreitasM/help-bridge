@@ -1,8 +1,7 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { loginRequest } from '../../modules/auth/auth.service';
 import './login.css';
-import axios from 'axios';
-
-const API_URL = "http://localhost:8080";
 
 function Login() {
 
@@ -10,14 +9,12 @@ function Login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
+  const navigate = useNavigate();
+
    const handleLogin = async () => {
     try {
-      const response = await axios.post(API_URL + "/auth/login", { email, password });
-      const token = response.data.token;
-
-      localStorage.setItem("token", token);
-
-      window.location.reload();
+      await loginRequest(email, password);
+      navigate("/calls");
     } catch (err: any) {
       setError(err.response?.data?.message || "Erro ao fazer login");
     }
@@ -32,7 +29,6 @@ function Login() {
         <h1>HelpBridge</h1>
       </div>
   
-    
 
       <div className='card-form'>
 
@@ -75,10 +71,6 @@ function Login() {
         
 
       </div>
-
-      
-
-    
 
   )
 }
