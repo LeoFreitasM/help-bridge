@@ -45,11 +45,6 @@ public class Usuarios implements UserDetails {
         this.profile = profile;
     }
 
-    public Usuarios(String email, String password, Profile profile){
-        this.email = email;
-        this.password = password;
-        this.profile = profile;
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
