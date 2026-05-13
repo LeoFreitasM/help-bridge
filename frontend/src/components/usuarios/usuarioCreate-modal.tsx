@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import type { CreateUsuariosData } from "../../interface/UsuariosData";
+import type { CreateUsuariosData, UsuariosData, UpdateUsuariosData } from "../../interface/UsuariosData";
 import { useUsuariosDataMutate } from "../../hooks/useUsuariosDataMutate";
 import './usuarioCreateModal.css';
+import { useUpdateUsuarios } from "../../hooks/useUpdateUsuarios";
 
 type Option = {
   label: string;
@@ -12,13 +13,14 @@ interface UsuarioCreateModalProps {
     label?: string;
     value: string;
     updateValue: (value: string) => void;
-    type?: "text" | "select";
+    type?: "text" | "select" | "password";
     options?: Option[];
 
 }
 
 interface ModalProps {
-    closeModal: () => void;
+  selectedUser: UsuariosData | null;
+  closeModal: () => void;
 }
 
 const Input = ({label, value, updateValue, type = "text", options = [] }: UsuarioCreateModalProps) => {
@@ -28,6 +30,16 @@ const Input = ({label, value, updateValue, type = "text", options = [] }: Usuari
 
             {type === "text" && (
                 <input
+                    value={value as string  }
+                    onChange={(event) =>
+                        updateValue(event.target.value as unknown as string)
+                    }
+                />
+            )}
+
+            {type === "password" && (
+                <input
+                type="password"
                     value={value as string  }
                     onChange={(event) =>
                         updateValue(event.target.value as unknown as string)
@@ -53,19 +65,40 @@ const Input = ({label, value, updateValue, type = "text", options = [] }: Usuari
     )
 };
 
+export function CreateModal({ selectedUser, closeModal }: ModalProps) {
 
-export function CreateModal({ closeModal }: ModalProps) {
-
+    
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [profile, setProfile] = useState<CreateUsuariosData["profile"]>("ROLE_ADMIN");
-    const {mutate, isSuccess} = useUsuariosDataMutate();
+    const {mutate, isSuccess: isCreateSuccess} = useUsuariosDataMutate();
+    const { mutate: mutateUpdate,  isSuccess: isUpdateSuccess } = useUpdateUsuarios();
+    
 
+    const isEditMode = !!selectedUser;
 
+    useEffect(() => {
+        if(selectedUser) {
+            
+            setName(selectedUser.name);
+            setEmail(selectedUser.email);
+            setPassword("");
+            setProfile(selectedUser.profile ?? "ROLE_ADMIN");
+        }
+    }, [selectedUser]);    
 
 
     const submit = () => {
+        if (isEditMode) {
+            const updateData: UpdateUsuariosData = {
+                id: selectedUser.id,
+                name,
+                email,
+                profile
+            }
+            mutateUpdate(updateData);
+        } else {
         const usuariosData: CreateUsuariosData = {
             name,
             email,
@@ -75,12 +108,13 @@ export function CreateModal({ closeModal }: ModalProps) {
         
      mutate(usuariosData);
     }
+}
 
     useEffect(() => {
-        if(isSuccess) {
+        if (isCreateSuccess || isUpdateSuccess) {
             closeModal();
         }
-    }, [isSuccess]);
+    }, [isCreateSuccess, isUpdateSuccess]);
 
 
     return (
@@ -91,12 +125,20 @@ export function CreateModal({ closeModal }: ModalProps) {
                 <form>
                     <Input label="Nome" value={name} updateValue={setName} type="text" />
                     <Input label="Email" value={email} updateValue={setEmail} type="text" />
-                    <Input label="Senha" value={password} updateValue={setPassword} type="text" />
+                    {!isEditMode && (
+                            <Input
+                                label="Senha"
+                                value={password}
+                                updateValue={setPassword}
+                                type="password"
+                            />
+                    )}
+                   
                     <Input label="Perfil" value={profile} updateValue={setProfile} type="select" options={[
                         { label: "Administrador", value: "ROLE_ADMIN" },
                         { label: "Usuário", value: "ROLE_USER" }
                     ]} />
-                    <button className="create-button" type="button" onClick={submit}>Criar Usuário</button>
+                    <button className="create-button" type="button" onClick={submit}> {isEditMode ? "Atualizar Usuário" : "Criar Usuário" }</button>
                     <button className="close-modal" type="button" onClick={closeModal}>Fechar</button>
                 </form>    
 

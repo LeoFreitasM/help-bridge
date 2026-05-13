@@ -1,5 +1,5 @@
 import { api } from '../api/api';
-import type { CallsData, CreateCallData } from '../interface/CallsData';
+import type { CallsData, CreateCallData, UpdateCallData } from '../interface/CallsData';
 
 export const callsService = {
 
@@ -14,7 +14,20 @@ export const callsService = {
     },
 
     updateCallStatus: async (callId: number, status: string) => {
-        const response = await api.put(`/calls/${callId}/status`, { status });
+        const response = await api.put(`/calls/update/${callId}`, { status });
         return response.data;
+    },
+
+    putCalls: async (data: UpdateCallData ): Promise<CallsData> => {
+        const response = await api.put(`/calls/update/${data.id}`, 
+        {
+            adminResponse: data.adminResponse
+        });
+        return response.data;
+    },
+
+    deleteCalls: async (id: number) => {
+        await api.delete(`/calls/${id}`);
     }
+
 }

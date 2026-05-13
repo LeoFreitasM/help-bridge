@@ -1,31 +1,49 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { loginRequest } from '../../modules/auth/auth.service';
 import './login.css';
+import type { UsuariosData } from '../../interface/UsuariosData';
+import { usuariosService } from '../../services/usuariosService';
+import { jwtDecode } from 'jwt-decode';
+import { useAuth } from '../../context/AuthContext';
+
 
 function Login() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  
 
   const navigate = useNavigate();
 
-   const handleLogin = async () => {
-    try {
-      await loginRequest(email, password);
+  const { login } = useAuth();
+
+ const handleLogin = async () => {
+
+  try {
+
+    const token = await loginRequest(email, password);
+
+    const decoded: any = jwtDecode(token);
+    console.log(decoded);
+
+    login(token, decoded.role);
+
+    
       navigate("/calls");
-    } catch (err: any) {
-      setError(err.response?.data?.message || "Erro ao fazer login");
-    }
-  };
+    
+  } catch (err: any) {
+    setError(err.response?.data?.message || "Erro ao fazer login");
+  }
+};
 
   return (
     <div >
 
     
       <div className='help'>
-        <svg className='icon' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><path d="M3 11h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-5Zm0 0a9 9 0 1 1 18 0m0 0v5a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3Z"></path><path d="M21 16v2a4 4 0 0 1-4 4h-5"></path></svg>
+        <svg className='icon' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" ><path d="M3 11h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-5Zm0 0a9 9 0 1 1 18 0m0 0v5a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3Z"></path><path d="M21 16v2a4 4 0 0 1-4 4h-5"></path></svg>
         <h1>HelpBridge</h1>
       </div>
   
@@ -57,7 +75,7 @@ function Login() {
 
           <label htmlFor="password">Senha</label>
           <div className='input-with-icon'>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
             <input type="password" placeholder='••••••••' value={password}
               onChange={e => setPassword(e.target.value)}/>
           </div>

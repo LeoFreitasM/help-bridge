@@ -1,5 +1,5 @@
 import type { UsuariosData } from '../interface/UsuariosData';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { usuariosService } from '../services/usuariosService';
 
 export function useUsuariosData() {
@@ -14,4 +14,16 @@ export function useUsuariosData() {
         data: query.data
     }
 
+}
+
+export function findById() {
+    const queryClient = useQueryClient();
+    
+    return useMutation({
+        mutationFn: usuariosService.getProfile,
+        retry: 2,
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["usuarios-data"] });
+        }
+    });
 }

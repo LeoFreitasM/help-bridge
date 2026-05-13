@@ -1,9 +1,11 @@
+
+
 .card {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 250px;
+    
+    
+    width: 270px;
     border-radius: 8px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     padding: 8px;
@@ -15,7 +17,79 @@
     margin: 2% 0;
 }
 
-.priodade{
-    color: #ef4444;
-    font-weight: bold;
+.title-priority {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+}
+
+.title{
+    justify-content: center;
+}
+
+.description {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    
+}
+
+.description svg {
+   flex-shrink: 0;
+}
+
+.description p {
+    margin-top: 1px;
+}
+
+.priority {
+    
+    border-radius: 4px;
+    padding: 2px;
+    color: #ffffff;
+    font-size: 12px;
+    width: fit-content;
+
+}
+
+.depart-user {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 8px;
+    
+}
+
+.department {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 8px;
+}
+
+.department svg {
+   font-size: 12px;
+}
+
+.user{
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 8px;
+}
+
+.user svg {
+    font-size: 12px;
+}
+
+.divider {
+  border-top: 1px solid #e5e7eb; 
+  margin: 16px 0;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }

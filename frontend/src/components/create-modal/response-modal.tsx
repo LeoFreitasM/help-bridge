@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
-import { useCallsDataMutate } from "../../hooks/useCallsDataMutate";
 import type { CallsData, CreateCallData, UpdateCallData } from "../../interface/CallsData";
-
-import './modal.css';
-
+import { useResponseCallMutate } from "../../hooks/useResponseCallMutate";
+import './response-modal.css';
 
 interface InputProps<T> {
     label?: string;
@@ -18,7 +16,7 @@ interface ModalProps {
     closeModal: () => void;
 }
 
-const Input = <T,>({label, value, updateValue, type = "text", options = [] }: InputProps<T>) => {
+const Input = <T,>({label, value, updateValue, type = "text", options = []}: InputProps<T>) => {
     return (
         <>
             {label && <label>{label}</label>}
@@ -29,6 +27,7 @@ const Input = <T,>({label, value, updateValue, type = "text", options = [] }: In
                     onChange={(event) =>
                         updateValue(event.target.value as unknown as T)
                     }
+                    
                 />
             )}
 
@@ -39,6 +38,7 @@ const Input = <T,>({label, value, updateValue, type = "text", options = [] }: In
                         updateValue(event.target.value as unknown as T)
                     }
                     rows={4}
+                    
                 />
             )}
 
@@ -48,6 +48,7 @@ const Input = <T,>({label, value, updateValue, type = "text", options = [] }: In
                     onChange={(event) =>
                         updateValue(event.target.value as unknown as T)
                     }
+
                 >
                     {options.map((option) => (
                         <option key={String(option)} value={option as string}>
@@ -60,8 +61,7 @@ const Input = <T,>({label, value, updateValue, type = "text", options = [] }: In
     );
 };
 
-
-export function CreateModal({ selectedUser, closeModal}: ModalProps ) {
+export function ResponseModal({ selectedUser, closeModal}: ModalProps ) {
 
     const [id, setId] = useState(0);
     const [title, setTitle] = useState("");
@@ -69,78 +69,83 @@ export function CreateModal({ selectedUser, closeModal}: ModalProps ) {
     const [department, setDepartment] = useState("");
     const [priority, setPriority] = useState<CreateCallData["priority"]>("LOW");
     const [usuario, setUsuario] = useState("");
+    const [adminResponse, setAdminResponse] = useState("");
+
     
+    const {mutate, isSuccess} = useResponseCallMutate();
 
-    const { mutate, isSuccess } = useCallsDataMutate();
-
-
-    useEffect(() => {
+   useEffect(() => {
         if(selectedUser) {
-            setId(selectedUser.id);
+            setId(selectedUser.id); 
             setTitle(selectedUser.title);
             setDescription(selectedUser.description);
             setDepartment(selectedUser.department);
             setPriority(selectedUser.priority);
             setUsuario(selectedUser.usuario);
-           
+            setAdminResponse(selectedUser.adminResponse);
         }
-        },)
+        }, [selectedUser]);
 
 
     const submit = () =>{
-        const updateData: UpdateCallData = {
+            const updateData: UpdateCallData = {
             id,
             title,
             description,
             department,
             priority,
             usuario,
-            adminResponse: ""
+            adminResponse
         }
         mutate(updateData);
-     }
-    
+    }
 
 
-    useEffect(() => {
-        if(isSuccess){
+  useEffect(() => {
+    if (isSuccess) {
         closeModal();
-        }
-    }, [isSuccess])
-
+    }
+}, [isSuccess])
 
     return (
-        
-        
+      
         <div className="modal-overlay">
             <div className="modal-body">
 
-                <h2>Cadastre um novo chamado</h2>
+                <h2>Responder chamado</h2>
+                
                 <form className="input-container">
-                    <label>Título</label>
-                    <Input value={ title } updateValue={setTitle} type="text" />
 
-                    <label>Descrição</label>
-                    <Input value={ description } updateValue={setDescription} type="textarea" />
+                    <div>
+                        <label>Título: </label>  { title }
+                     
+                    </div>
 
-                    <div className="dep-pri">
+                    <div>
+                     <label>Descrição: </label> { description }
+                     
+                    </div>
+                    
                     <div className="department">
-                        <label>Departamento</label>
-                        <Input value={ department } updateValue={setDepartment} type="text" />
+                        <label>Departamento: </label> { department }
+                        
                     </div>
                     
-                    
-                    <div className='priority'>
-                    <label>Prioridade</label>
-                    <Input value={ priority } updateValue={setPriority} type="select" options={["LOW", "MEDIUM", "HIGH"]} />
+                    <div className="department">
+                        <label>Usuario: </label> <p> #{ usuario }</p>
+                        
                     </div>
+
+                     <div className="department">
+                        <label>Resposta Chamado</label>
+                        <Input value={ adminResponse } updateValue={setAdminResponse} type="textarea" />
                     </div>
                     
 
                 </form>
 
                 <div className="btns">
-                    <button onClick={submit} className="btn-secondary">Cadastrar</button>
+                    <button onClick={submit} className="btn-secondary">Responder</button>
                     <button onClick={closeModal} className="btn-cancelar">Cancelar</button>
                 </div>
             </div>

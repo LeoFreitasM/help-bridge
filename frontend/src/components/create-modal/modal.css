@@ -84,11 +84,12 @@
     position: initial;
     width: 100%;
     margin-top: 32px;
-    background-color: #eb1515;
+    background-color: #ffffff;
+    border: 1px solid #6435ff;
 }
 
 .btn-cancelar:hover{
-    background-color: #f87171;
+    background-color: #3c00ff;
     scale: calc(1);
 }
 
