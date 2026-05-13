@@ -1,7 +1,7 @@
-🔗 HELPBRIDGE - Sistema de Gerenciamento de Chamados
+# HelpBridge - Sistema de Gerenciamento de Chamados
 Sistema full stack para gerenciamento de usuários e chamados (tickets), com autenticação segura via JWT e controle de acesso baseado em perfis.
 
-🔗FUNCIONALIDADES
+# Funcionalidades
 👤 Usuários
 Cadastro de usuários
 Atualização de usuários
@@ -21,6 +21,7 @@ Geração de token seguro
 Proteção de rotas
 Controle de sessão
 
+# Como funciona e executa:
 O sistema é dividido em duas partes:
 Backend (Spring Boot)
 Frontend (React + TypeScript)
@@ -31,43 +32,38 @@ Comunicação via API REST.
 O frontend consome o backend via Axios.
 
 ⚙️Backend
-# entrar na pasta backend
-cd backend
+entrar na pasta backend: cd backend
 
-# executar aplicação
-mvn spring-boot:run
+executar aplicação: mvn spring-boot:run
 
 O backend iniciará em: http://localhost:8080
 
 ⚙️Frontend
-# entrar na pasta frontend
-cd frontend
-
-# instalar dependências
-npm install
-
-# iniciar aplicação
-npm run dev
+ entrar na pasta frontend: cd frontend
+ 
+ instalar dependências: npm install
+ 
+ iniciar aplicação: npm run dev
 
 O frontend iniciará em: http://localhost:5173
 
-🔗TECNOLOGIAS UTILIZADAS
-🖥️ Backend:
-Java
-Spring Boot
-Spring Security
-JWT (JSON Web Token)
-JPA / Hibernate
+# Tecnologias Utilizadas
+🖥️ Backend: 
+Java, 
+Spring Boot, 
+Spring Security, 
+JWT (JSON Web Token), 
+JPA / Hibernate, 
 Maven
 
-🖥️ Frontend:
-React
-TypeScript
-Axios
+🖥️ Frontend: 
+React, 
+TypeScript, 
+Axios, 
 Hooks (React Hooks)
 
-🖥️ Banco de dados:
+🖥️ Banco de dados: 
 MySQL
 
-👨‍💻 AUTOR
+# Autor
 Desenvolvido por Leonardo Freitas.
