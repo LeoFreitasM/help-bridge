@@ -2,23 +2,23 @@
 Sistema full stack para gerenciamento de usuários e chamados (tickets), com autenticação segura via JWT e controle de acesso baseado em perfis.
 
 # Funcionalidades
-👤 Usuários
-Cadastro de usuários
-Atualização de usuários
-Remoção de usuários
-Controle de acesso por perfil (ROLE_USER / ROLE_ADMIN)
+👤 Usuários: 
+Cadastro de usuários, 
+Atualização de usuários, 
+Remoção de usuários, 
+Controle de acesso por perfil (ROLE_USER / ROLE_ADMIN) 
 
-🎫 Chamados (Tickets)
-Criação de chamados
-Listagem de chamados
-Atualização de chamados
-Resposta de chamados
+🎫 Chamados (Tickets): 
+Criação de chamados, 
+Listagem de chamados, 
+Atualização de chamados, 
+Resposta de chamados, 
 Controle de urgência e departamento
 
-🔐 Autenticação
-Login com JWT
-Geração de token seguro
-Proteção de rotas
+🔐 Autenticação: 
+Login com JWT, 
+Geração de token seguro, 
+Proteção de rotas, 
 Controle de sessão
 
 # Como funciona e executa:
