@@ -1,0 +1,23 @@
+
+textarea {
+    width: 100%;
+}
+
+
+
+.btn-cancelar{
+    position: initial;
+    width: 100%;
+    margin-top: 32px;
+    background-color: #eb1515;
+}
+
+.btn-cancelar:hover{
+    background-color: #f87171;
+    scale: calc(1);
+}
+
+.btns{
+    display: flex;
+    gap: 16px;
+}

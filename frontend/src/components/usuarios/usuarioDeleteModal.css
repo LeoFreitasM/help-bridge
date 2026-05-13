@@ -1,0 +1,50 @@
+.modal-content {
+    background-color: white;
+    border: 1px solid #000000;
+
+
+    padding: 32px;
+     width: 400px;
+     max-width: 90%;
+    border-radius: 12px;
+
+}
+
+.modal-content h2 {
+    font-size: 24px;
+    font-family: Arial, Helvetica, sans-serif; 
+}
+
+.modal-content form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+}
+
+.btn-excluir {
+    background-color: #155dfc;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 10px;
+    
+}
+
+.btn-excluir:hover {
+    background-color: #0d47a1;
+}
+
+.btn-close-modal {
+    background-color: transparent;
+    color: #155dfc;
+    padding: 10px;
+    box-shadow: rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    
+}
+
+.btn-close-modal:hover {
+    color: #0d47a1;
+}
