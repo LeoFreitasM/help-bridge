@@ -1,51 +1,73 @@
-Sistema de Chamados Interno 🛠️
+🔗 HELPBRIDGE - Sistema de Gerenciamento de Chamados
+Sistema full stack para gerenciamento de usuários e chamados (tickets), com autenticação segura via JWT e controle de acesso baseado em perfis.
 
-Um sistema de chamados interno com painel administrativo, pensado para empresas que precisam gerenciar solicitações internas de colaboradores de forma organizada e eficiente.
+🔗FUNCIONALIDADES
+👤 Usuários
+Cadastro de usuários
+Atualização de usuários
+Remoção de usuários
+Controle de acesso por perfil (ROLE_USER / ROLE_ADMIN)
 
-⚙️ Cenário real
+🎫 Chamados (Tickets)
+Criação de chamados
+Listagem de chamados
+Atualização de chamados
+Resposta de chamados
+Controle de urgência e departamento
 
-Imagine uma empresa onde colaboradores podem abrir chamados internos para:
--Problemas técnicos
--Solicitações de materiais
--Reclamações
--Solicitações de férias, etc.
+🔐 Autenticação
+Login com JWT
+Geração de token seguro
+Proteção de rotas
+Controle de sessão
 
-O setor de TI/Administração recebe e gerencia esses chamados, garantindo que tudo seja resolvido de maneira organizada.
+O sistema é dividido em duas partes:
+Backend (Spring Boot)
+Frontend (React + TypeScript)
 
-🧱 Funcionalidades
-👨‍💼 Usuário comum (Colaborador)
+Comunicação via API REST.
 
--Cadastro/Login ✅ (em desenvolvimento)
--Abrir novo chamado ✅
--Ver status dos seus chamados ✅(em desenvolvimento)
--Histórico de chamados ✅(em desenvolvimento)
+🖥️ Comunicação com API
+O frontend consome o backend via Axios.
 
-🛠️ Admin (TI/Atendimento)
+⚙️Backend
+# entrar na pasta backend
+cd backend
 
--Login como administrador ✅ (em desenvolvimento)
--Visualizar todos os chamados ✅
--Filtrar por status, prioridade ou setor ✅
--Atualizar status (Novo, Em andamento, Resolvido) ✅
--Responder chamados ✅
--Dashboard com número de chamados por status/setor ⚡ (em breve)
+# executar aplicação
+mvn spring-boot:run
 
-📊 Dashboard (para Admin)
+O backend iniciará em: http://localhost:8080
 
--Gráfico de chamados por setor ⚡ (em breve)
--Volume de chamados nos últimos 7 dias ⚡ (em breve)
+⚙️Frontend
+# entrar na pasta frontend
+cd frontend
 
-🚀 Diferenciais
+# instalar dependências
+npm install
 
--Autenticação com níveis de acesso (admin x comum) ⚡ (em desenvolvimento)
--Sistema parecido com ferramentas reais de help desk
--Arquitetura em camadas para fácil manutenção
--Planejado para integração futura com front-end responsivo
+# iniciar aplicação
+npm run dev
 
-💻 Tecnologias
+O frontend iniciará em: http://localhost:5173
 
-Linguagem: Java
-Framework Backend: Spring Boot
-Banco de dados: MySQL
-Autenticação: JWT / Spring Security ⚡ (em desenvolvimento)
-Frontend: Em desenvolvimento
->>>>>>> 934f397af99bd688786254c4c582193b11197fe5
+🔗TECNOLOGIAS UTILIZADAS
+🖥️ Backend:
+Java
+Spring Boot
+Spring Security
+JWT (JSON Web Token)
+JPA / Hibernate
+Maven
+
+🖥️ Frontend:
+React
+TypeScript
+Axios
+Hooks (React Hooks)
+
+🖥️ Banco de dados:
+MySQL
+
+👨‍💻 AUTOR
+Desenvolvido por Leonardo Freitas.
