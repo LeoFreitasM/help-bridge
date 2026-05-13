@@ -15,6 +15,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CallsService {
@@ -71,6 +72,17 @@ public class CallsService {
 
     public CallsResponseDTO update(Long id, CallsUpdateDTO dto) {
 
+
+        Usuarios users = (Usuarios) SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getPrincipal();
+
+        Long userId = users.getId();
+
+        Usuarios usuario = usuariosRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("Usuário " + userId + " Tentando modificar"));
+
         Calls calls = callsRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Chamado não encontrado"));
 
@@ -78,16 +90,13 @@ public class CallsService {
         if (dto.getDescription() != null) calls.setDescription(dto.getDescription());
         if (dto.getPriority() != null) calls.setPriority(dto.getPriority());
         if (dto.getStatus() != null) calls.setStatus(dto.getStatus());
-        if (dto.getAdminResponse() != null) calls.setAdminResponse(dto.getAdminResponse());
-
-
+        if (dto.getAdminResponse() != null )calls.setAdminResponse(dto.getAdminResponse());
 
         Calls updated = callsRepository.save(calls);
 
         return mapper.forCallsResponseDTO(updated);
 
     }
-
 
     public void delete(Long id) {
         callsRepository.deleteById(id);

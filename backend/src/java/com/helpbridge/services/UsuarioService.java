@@ -57,12 +57,6 @@ public class UsuarioService {
 
     }
 
-
-   /* public Optional<Usuarios> findById (Long id){
-
-        return usuariosRepository.findById(id);
-    }*/
-
     public UsuarioResponseDTO findById(Long id) {
 
         return usuariosRepository.findById(id)
@@ -78,7 +72,7 @@ public class UsuarioService {
 
         if (dto.getName() != null) usuario.setName(dto.getName());
         if (dto.getEmail() != null) usuario.setEmail(dto.getEmail());
-        if (dto.getPassword() != null) usuario.setPassword(dto.getPassword());
+        if (dto.getProfile() != null) usuario.setProfile(dto.getProfile());
 
         Usuarios updated = usuariosRepository.save(usuario);
 
