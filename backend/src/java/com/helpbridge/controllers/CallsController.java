@@ -45,8 +45,6 @@ public class CallsController {
     @PutMapping("/update/{id}")
     public ResponseEntity<CallsResponseDTO> update(@PathVariable("id") Long id, @RequestBody CallsUpdateDTO dto) {
 
-        System.out.println(dto.getStatus());
-
         return ResponseEntity.ok(callsService.update(id, dto));
     }
 
