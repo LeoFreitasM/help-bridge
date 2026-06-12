@@ -1,69 +1,115 @@
-# HelpBridge - Sistema de Gerenciamento de Chamados
-Sistema full stack para gerenciamento de usuários e chamados (tickets), com autenticação segura via JWT e controle de acesso baseado em perfis.
+<div align="center">
 
-# Funcionalidades
-👤 Usuários: 
-Cadastro de usuários, 
-Atualização de usuários, 
-Remoção de usuários, 
-Controle de acesso por perfil (ROLE_USER / ROLE_ADMIN) 
+<h1>🎫 HelpBridge</h1>
+<p><strong>Sistema Full Stack de Gerenciamento de Chamados Internos</strong></p>
 
-🎫 Chamados (Tickets): 
-Criação de chamados, 
-Listagem de chamados, 
-Atualização de chamados, 
-Resposta de chamados, 
-Controle de urgência e departamento
+![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/Spring_Boot-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white)
+![Spring Security](https://img.shields.io/badge/Spring_Security-6DB33F?style=for-the-badge&logo=spring-security&logoColor=white)
+![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
+![JWT](https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white)
 
-🔐 Autenticação: 
-Login com JWT, 
-Geração de token seguro, 
-Proteção de rotas, 
-Controle de sessão
+</div>
 
-# Como funciona e executa:
-O sistema é dividido em duas partes:
-Backend (Spring Boot)
-Frontend (React + TypeScript)
+---
 
-Comunicação via API REST.
+## 📋 Sobre o projeto
 
-🖥️ Comunicação com API
-O frontend consome o backend via Axios.
+O **HelpBridge** é uma aplicação web full stack para gestão de chamados internos (help desk), desenvolvida com backend em **Java + Spring Boot** e frontend em **React + TypeScript**.
 
-⚙️Backend
-entrar na pasta backend: cd backend
+O sistema permite que usuários abram chamados, acompanhem o status e que administradores gerenciem, respondam e controlem as solicitações — tudo com autenticação segura via **JWT** e controle de acesso por perfil.
 
-executar aplicação: mvn spring-boot:run
+---
 
-O backend iniciará em: http://localhost:8080
+## ✨ Funcionalidades
 
-⚙️Frontend
- entrar na pasta frontend: cd frontend
- 
- instalar dependências: npm install
- 
- iniciar aplicação: npm run dev
+### 👤 Usuários
+- Cadastro, edição e remoção de usuários
+- Controle de acesso por perfil: `ROLE_USER` e `ROLE_ADMIN`
 
-O frontend iniciará em: http://localhost:5173
+### 🎫 Chamados (Tickets)
+- Criação e listagem de chamados
+- Atualização e resposta de chamados
+- Controle de **urgência** e **departamento**
 
-# Tecnologias Utilizadas
-🖥️ Backend: 
-Java, 
-Spring Boot, 
-Spring Security, 
-JWT (JSON Web Token), 
-JPA / Hibernate, 
-Maven
+### 🔐 Autenticação
+- Login com geração de token **JWT**
+- Proteção de rotas por perfil
+- Controle de sessão seguro
 
-🖥️ Frontend: 
-React, 
-TypeScript, 
-Axios, 
-Hooks (React Hooks)
+---
 
-🖥️ Banco de dados: 
-MySQL
+## 🛠️ Tecnologias
 
-# Autor
-Desenvolvido por Leonardo Freitas.
+| Camada | Tecnologias |
+|---|---|
+| **Backend** | Java, Spring Boot, Spring Security, JWT, JPA/Hibernate, Maven |
+| **Frontend** | React, TypeScript, Axios, React Hooks |
+| **Banco de Dados** | MySQL |
+
+---
+
+## 🚀 Como rodar localmente
+
+### Pré-requisitos
+- Java 17+
+- Node.js 18+
+- MySQL rodando localmente
+
+### Backend
+
+```bash
+# Acesse a pasta do backend
+cd backend
+
+# Configure o banco de dados em:
+# src/main/resources/application.properties
+
+# Execute a aplicação
+mvn spring-boot:run
+```
+
+> O backend iniciará em: `http://localhost:8080`
+
+### Frontend
+
+```bash
+# Acesse a pasta do frontend
+cd frontend
+
+# Instale as dependências
+npm install
+
+# Inicie a aplicação
+npm run dev
+```
+
+> O frontend iniciará em: `http://localhost:5173`
+
+---
+
+## 🏗️ Estrutura do projeto
+
+```
+help-bridge/
+├── backend/          # API REST com Spring Boot
+├── frontend/         # Interface com React + TypeScript
+├── docs/             # Documentação do projeto
+└── README.md
+```
+
+---
+
+## 🔗 Comunicação Frontend ↔ Backend
+
+O frontend consome o backend via **Axios**, com todas as requisições autenticadas por token JWT enviado no header `Authorization: Bearer <token>`.
+
+---
+
+<div align="center">
+
+Desenvolvido por **Leonardo Freitas** · [LinkedIn](https://linkedin.com/in/leonardofreitasdev) · [GitHub](https://github.com/LeoFreitasM)
+
+</div>
